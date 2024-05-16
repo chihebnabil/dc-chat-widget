@@ -1,0 +1,38 @@
+{
+  "name": "dc-chat-widget",
+  "description": "A Chat widget from DocsChatAI",
+  "version": "0.0.10",
+  "type": "module",
+  "main": "dist/dc-chat-widget.js",
+  "homepage": "https://docschatai.com",
+  "author": {
+    "name": "Nabil Chiheb",
+    "email": "chiheb.design@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chihebnabil/dc-chat-widget"
+  },
+  "keywords": [
+    "chat",
+    "widget",
+    "ai",
+    "docschat",
+    "docschatai",
+    "webcomponent"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "vue": "^3.4.21"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "vite": "^5.2.8"
+  },
+  "files": ["dist"]
+}
