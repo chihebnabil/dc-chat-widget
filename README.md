@@ -2,6 +2,10 @@
 
 `dc-chat-widget` is a and easy-to-use chat widget for your web applications.
 
+
+[Watch the video](https://www.loom.com/embed/0e18a9d4d47c4446bb77e0f34c3fb4e3?sid=f25e5121-1ec5-4c18-ad15-db42275b4733)
+
+
 ## Before you start
 
 Before you start using the chat widget, you need to:
