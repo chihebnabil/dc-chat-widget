@@ -45,6 +45,8 @@ You can configure the chat widget by passing the following attributes:
 - `subtitle`: The subtitle of the chat widget.
 - `theme`: The hex color code of the chat widget.
 - `btn-size`: The size of the chat widget button. Default is `50px`.
+- `btn-bottom`: The bottom position of the chat widget button. Default is `10px`.
+- `btn-right`: The right position of the chat widget button. Default is `10px`.
 - `font-family`: The font family of the chat widget. Default is `Arial, Helvetica, sans-serif`.
 - `actions`: quick actions to be displayed in the chat widget. Default is `[]`.
 

@@ -5,7 +5,9 @@
         <button @click="showChatBox = !showChatBox" :style="{
             backgroundColor: props.theme,
             width: props.btnSize,
-            height: props.btnSize
+            height: props.btnSize,
+            bottom: props.btnBottom,
+            right: props.btnRight
         }" class="chatbox__button">
             <XIcon v-if="showChatBox" />
             <ChatIcon v-if="!showChatBox" />
@@ -61,6 +63,14 @@ const props = defineProps({
         type: String,
         default: '50px'
     },
+    btnBottom: {
+        type: String,
+        default: '10px'
+    },
+    btnRight: {
+        type: String,
+        default: '10px'
+    },
     theme: {
         type: String,
         default: '#4CAF50'
@@ -93,6 +103,7 @@ const props = defineProps({
     position: fixed;
     bottom: 10px;
     right: 10px;
+    z-index: 999;
 }
 
 .chatbox__button {
@@ -115,7 +126,7 @@ const props = defineProps({
 
 .chatbox__container {
     position: absolute;
-    bottom: calc(100% + 5px);
+    bottom: calc(100% + 10px);
     right: 0px;
     min-width: 380px;
     min-height: 500px;
