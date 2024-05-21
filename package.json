@@ -1,7 +1,7 @@
 {
   "name": "dc-chat-widget",
   "description": "A Chat widget from DocsChatAI",
-  "version": "0.0.11",
+  "version": "0.0.13",
   "type": "module",
   "main": "dist/dc-chat-widget.js",
   "homepage": "https://docschatai.com",
@@ -19,7 +19,9 @@
     "ai",
     "docschat",
     "docschatai",
-    "webcomponent"
+    "webcomponent",
+    "custom-element",
+    "ai assistant"
   ],
   "scripts": {
     "dev": "vite",
@@ -28,11 +30,14 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "socket.io-client": "^4.7.5",
     "vue": "^3.4.21"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.0.4",
     "vite": "^5.2.8"
   },
-  "files": ["dist"]
+  "files": [
+    "dist"
+  ]
 }

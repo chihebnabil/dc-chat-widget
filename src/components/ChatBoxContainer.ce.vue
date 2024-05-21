@@ -14,9 +14,8 @@
             </div>
         </div>
         <div class="chatbox__container_footer">
-            <input required v-model="userInput" type="text" 
-            v-on:keyup.enter="sendMessage"
-            placeholder="Type a message..." />
+            <input required v-model="userInput" type="text" v-on:keyup.enter="sendMessage"
+                placeholder="Type a message..." />
             <button :class="{ 'loading__state_btn': store.loading }" @click="sendMessage">
                 <SendIcon v-if="!store.loading" />
             </button>
@@ -31,26 +30,20 @@ import { ref, nextTick } from 'vue'
 import store from './store'
 const userInput = ref('')
 let contentContainer = ref(null);
+import socket from './socket'
 
-const fetchMessage = async (message) => {
-    let baseUrl = (process.env.NODE_ENV === 'development') ? 'http://localhost:3000/' : 'https://docschatai.com/'
-
-    const response = await fetch(baseUrl + 'api/guest/ask', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(
-            {
-                workspace_id: store.workplaceId,
-                message: message
-            }
-        )
+socket.on('message:assistant:start', () => {
+    store.messages.push({ content: '', role: 'assistant' })
+})
+socket.on('message:assistant:end', () => {
+    store.loading = false
+    nextTick(() => {
+        contentContainer.value.scrollTop = contentContainer.value.scrollHeight
     })
-    const data = await response.json()
-
-    return data.body.message;
-}
+})
+socket.on('message:assistant', (msgChunk) => {
+    store.messages[store.messages.length - 1].content += msgChunk
+})
 
 const sendMessage = async (eventOrMsg = null) => {
     try {
@@ -73,19 +66,11 @@ const sendMessage = async (eventOrMsg = null) => {
         }
 
         store.messages.push({ content: userInput.value })
-
-        const assistantMessage = await fetchMessage(userInput.value);
-        store.messages.push({
-            content: assistantMessage,
-            role: 'assistant'
+        socket.emit('message:guest', {
+            message: userInput.value,
+            workspace_id: store.workplaceId
         })
 
-        nextTick(() => {
-            setTimeout(() => {
-                contentContainer.value.scrollTop = contentContainer.value.scrollHeight;
-                userInput.value = '';
-            }, 0);
-        });
     } catch (e) {
         console.log(e)
     } finally {

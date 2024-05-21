@@ -4,7 +4,11 @@
 
 ## Before you start
 
-Before you start using the chat widget, you need to create an account on [DocsChatAI.com](https://docschatai.com) and upload at least one file the workspace (Folder) you want to use with the chat widget.
+Before you start using the chat widget, you need to:
+
+- Create an account on [DocsChatAI.com](https://docschatai.com) 
+- Upload at least one file the workspace (Folder)
+- Copy the workspace (Folder) ID from [this page](https://docschatai.com/workspaces) by clicking on the three dots on the right side of the workspace (Folder) and selecting `Copy ID`.
 
 ## Installation
 
