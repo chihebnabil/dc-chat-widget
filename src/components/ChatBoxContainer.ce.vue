@@ -33,10 +33,12 @@ let contentContainer = ref(null);
 import socket from './socket'
 
 socket.on('message:assistant:start', () => {
+    store.loading = true
     store.messages.push({ content: '', role: 'assistant' })
 })
 socket.on('message:assistant:end', () => {
     store.loading = false
+    userInput.value = ''
     nextTick(() => {
         contentContainer.value.scrollTop = contentContainer.value.scrollHeight
     })
@@ -46,35 +48,25 @@ socket.on('message:assistant', (msgChunk) => {
 })
 
 const sendMessage = async (eventOrMsg = null) => {
-    try {
-        store.loading = true
-        let msg;
-        if (eventOrMsg instanceof Event) {
-            eventOrMsg.preventDefault();
-            eventOrMsg.stopPropagation();
-            msg = userInput.value;
-        } else {
-            msg = eventOrMsg;
-        }
-
-        if (msg) {
-            userInput.value = msg
-        }
-        // prevent empty message
-        if (!userInput.value) {
-            return
-        }
-
-        store.messages.push({ content: userInput.value })
-        socket.emit('message:guest', {
-            message: userInput.value,
-            workspace_id: store.workplaceId
-        })
-
-    } catch (e) {
-        console.log(e)
-    } finally {
-        store.loading = false
+    let msg;
+    if (eventOrMsg instanceof Event) {
+        eventOrMsg.preventDefault();
+        eventOrMsg.stopPropagation();
+        msg = userInput.value;
+    } else {
+        msg = eventOrMsg;
     }
+
+    if (msg) {
+        userInput.value = msg
+    }
+    if (!userInput.value) {
+        return
+    }
+    store.messages.push({ content: userInput.value })
+    socket.emit('message:guest', {
+        message: userInput.value,
+        workspace_id: store.workplaceId
+    })
 }
 </script>
